@@ -431,4 +431,11 @@ abstract Mat4(FloatArray) {
 	public inline static function multVecOp(m:Mat4, v:Vec4):Vec4 {
 		return multVec(m, v, new Vec4());
 	}
+
+    #if cpp
+    @:to
+    inline function toDataPointer():cpp.Star<cpp.Float32> {
+        return cpp.NativeArray.address(this.getData().bytes.getData(), 0).ptr;
+    }
+    #end
 }

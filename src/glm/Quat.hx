@@ -346,4 +346,11 @@ abstract Quat(FloatArray) {
 
         return dest;
     }
+
+    #if cpp
+    @:to
+    inline function toDataPointer():cpp.Star<cpp.Float32> {
+        return cpp.NativeArray.address(this.getData().bytes.getData(), 0).ptr;
+    }
+    #end
 }

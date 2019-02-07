@@ -18,7 +18,7 @@ import glm.GLM.FloatArray;
 /**
  *  A two-element vector
  */
-abstract Vec2(FloatArray) {
+abstract Vec2(FloatArray){
     /**
      *  Accessor utility for the first element of the vector
      */
@@ -322,4 +322,11 @@ abstract Vec2(FloatArray) {
         dest.y = glm.GLM.lerp(a.y, b.y, t);
         return dest;
     }
+
+    #if cpp
+    @:to
+    public function toDataPointer():cpp.Star<cpp.Float32> {
+        return cpp.NativeArray.address(this.getData().bytes.getData(), 0).ptr;
+    }
+    #end
 }

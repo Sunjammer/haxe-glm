@@ -348,4 +348,11 @@ abstract Vec3(FloatArray) {
         dest.z = glm.GLM.lerp(a.z, b.z, t);
         return dest;
     }
+
+    #if cpp
+    @:to
+    inline function toDataPointer():cpp.Star<cpp.Float32> {
+        return cpp.NativeArray.address(this.getData().bytes.getData(), 0).ptr;
+    }
+    #end
 }
